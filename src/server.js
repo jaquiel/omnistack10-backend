@@ -1,12 +1,15 @@
 const express = require('express')
-
 const mongoose = require('mongoose')
-
 const cors = require('cors')
+const http = require('http')
 
 const routes = require('./routes')
+const { setupWebSocket } = require('./websocket.js')
 
 const app = express()
+const server = http.Server(app)
+
+setupWebSocket(server)
 
 const dbUrl = 'mongodb+srv://Omnistack10:Omnistack10@omnistack10-89pzq.mongodb.net/test?retryWrites=true&w=majority'
 
@@ -23,4 +26,4 @@ app.use(express.json())
 app.use(routes)
 
 
-app.listen(3030)
+server.listen(3030)
